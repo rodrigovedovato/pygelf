@@ -31,13 +31,28 @@
             "title": "tls",
             "configuration": {
                 "bind_address": "0.0.0.0",
-                "port": 12204,
+                "port": 1220,
                 "tls_enable": true,
                 "tls_cert_file": "/usr/share/graylog/data/cert.pem",
                 "tls_key_file": "/usr/share/graylog/data/key.pem",
                 "tls_key_password": "secret"
             },
             "type": "org.graylog2.inputs.gelf.tcp.GELFTCPInput",
+            "global": true
+        },
+        {
+            "title": "kafka",
+            "configuration": {
+                "decompress_size_limit": "8388608",
+                "fetch_min_bytes": "5",
+                "fetch_wait_max": "100",
+                "offset_reset": "largest",
+                "threads": "2",
+                "throttling_allowed": "false",
+                "topic_filter": "^logs$",
+                "zookeeper": "kafka:2181"
+            },
+            "type": "org.graylog2.inputs.gelf.kafka.GELFKafkaInput",
             "global": true
         }
     ],

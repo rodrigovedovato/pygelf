@@ -101,11 +101,6 @@ HTTP:
 - **path** ('/gelf' by default) - path of the HTTP input (http://docs.graylog.org/en/latest/pages/sending_data.html#gelf-via-http)
 - **timeout** (5 by default) - amount of seconds that HTTP client should wait before it discards the request if the server doesn't respond
 
-Kafka:
-- **bootstrap_servers** The Kafka servers the message will be sent to
-- **topic** The topic you'll be sending the messages
-- **producer_options** A dictionary containing optional Kafka configuration properties. See [this](https://kafka-python.readthedocs.io/en/master/apidoc/KafkaProducer.html) for more information about these parameters
-
 Static fields
 =============
 

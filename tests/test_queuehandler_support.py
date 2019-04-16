@@ -1,8 +1,15 @@
 import logging
 import pytest
 import mock
-from pygelf import GelfTcpHandler, GelfUdpHandler, GelfHttpHandler, GelfTlsHandler
+from pygelf import GelfTcpHandler, GelfUdpHandler, GelfHttpHandler, GelfTlsHandler, GelfKafkaHandler
 from tests.helper import logger, get_unique_message, log_exception
+
+
+kafka_options = {
+    "acks": 0,
+    "linger_ms": 10,
+    "max_block_ms": 5000
+}
 
 
 @pytest.fixture(params=[
@@ -12,6 +19,7 @@ from tests.helper import logger, get_unique_message, log_exception
     GelfHttpHandler(host='127.0.0.1', port=12203),
     GelfHttpHandler(host='127.0.0.1', port=12203, compress=False),
     GelfTlsHandler(host='127.0.0.1', port=12204),
+    GelfKafkaHandler("localhost:9092", "logs", kafka_options, _facility="kfl", _origin="dev")
     # GelfTlsHandler(host='127.0.0.1', port=12204, validate=True, ca_certs='tests/config/cert.pem'),
 ])
 def handler(request):

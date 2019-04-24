@@ -59,7 +59,7 @@ According to the GELF spec, each message has the following mandatory fields:
 
 .. _syslog-compliant: https://en.wikipedia.org/wiki/Syslog#Severity_level
 
-In debug mode (when handler was created with debug=True option) each message contains some extra fields (which are pretty self-explanatory): 
+In debug mode (when handler was created with debug=True option) each message contains some extra fields (which are pretty self-explanatory):
 
 - **_file**
 - **_line**

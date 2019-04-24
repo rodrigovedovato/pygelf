@@ -1,6 +1,6 @@
 pygelf
 ======
-|travis| |coveralls| |pypi|
+|travis| |coveralls|
 
 .. |travis| image:: https://travis-ci.org/elo7/pygelf.svg?branch=elo7
     :target: https://travis-ci.org/elo7/pygelf

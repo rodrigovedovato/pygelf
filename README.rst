@@ -7,23 +7,15 @@ pygelf
 .. |coveralls| image:: https://coveralls.io/repos/github/elo7/pygelf/badge.svg?branch=elo7
     :target: https://coveralls.io/github/elo7/pygelf?branch=elo7
 
-
-Python logging handlers with GELF (Graylog Extended Log Format) support.
-
-Currently TCP, UDP, TLS (encrypted TCP) and HTTP logging handlers are supported.
-
-Get pygelf
-==========
-.. code:: python
-
-    pip install pygelf
+Currently TCP, UDP, TLS (encrypted TCP), HTTP and Kafka logging handlers are supported.
 
 Usage
 =====
 
 .. code:: python
 
-    from pygelf import GelfTcpHandler, GelfUdpHandler, GelfTlsHandler, GelfHttpHandler
+    from pygelf import GelfTcpHandler, GelfUdpHandler, GelfTlsHandler, GelfHttpHandler, GelfKafkaHandler
+
     import logging
 
 
@@ -33,6 +25,18 @@ Usage
     logger.addHandler(GelfUdpHandler(host='127.0.0.1', port=9402))
     logger.addHandler(GelfTlsHandler(host='127.0.0.1', port=9403))
     logger.addHandler(GelfHttpHandler(host='127.0.0.1', port=9404))
+
+    # Kafka handler requires a few more configurations.
+    # kafka_options is a dictionary that contains additional values that can be used to configure your Producer
+
+    kafka_options = {
+        "acks": 0,
+        "linger_ms": 10,
+        "compression_type": "lz4",
+        "max_block_ms": 5000
+    }
+
+    logger.addHandler(GelfKafkaHandler("127.0.0.1:9092", "oak", kafka_options))
 
     logger.info('hello gelf')
 
@@ -98,6 +102,12 @@ HTTP:
 - **compress** (True by default) - if true, compress log messages before sending them to the server
 - **path** ('/gelf' by default) - path of the HTTP input (http://docs.graylog.org/en/latest/pages/sending_data.html#gelf-via-http)
 - **timeout** (5 by default) - amount of seconds that HTTP client should wait before it discards the request if the server doesn't respond
+
+Kafka:
+
+- **bootstrap_servers** - The Kafka servers the message will be sent to
+- **topic** -  Target topic
+- **producer_options** - A dictionary containing producer options
 
 Static fields
 =============
